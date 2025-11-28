@@ -4,26 +4,31 @@ metadata:
   name: echo-server
   namespace: argocd
 spec:
+  goTemplate: true
   generators:
     - git:
-        repoURL: __REPO_URL__
+        repoURL: https://github.com/gsigmund/open-ecosystem-challenges.git
         revision: HEAD
         directories:
           - path: adventures/01-echoes-lost-in-orbit/beginner/manifests/overlays/*
   template:
     metadata:
-      name: echo-server
+      name: 'echo-{{.path.basename}}'
       labels:
         app.kubernetes.io/managed-by: argocd
     spec:
       project: default
       source:
-        repoURL: __REPO_URL__
+        repoURL: https://github.com/gsigmund/open-ecosystem-challenges.git
         targetRevision: HEAD
-        path: adventures/01-echoes-lost-in-orbit/beginner/manifests/overlays/{{path.basename}}
+        path: '{{.path.path}}'
       destination:
         server: https://kubernetes.default.svc
-        namespace: echo
+        namespace: 'echo-{{.path.basename}}'
       syncPolicy:
+        automated: 
+          selfHeal: true
+          prune: true
+          enabled: true
         syncOptions:
           - CreateNamespace=true
