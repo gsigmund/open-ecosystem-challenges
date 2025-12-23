@@ -5,6 +5,7 @@ metadata:
 spec:
   args:
     - name: namespace
+    - name: replica-count
   metrics:
     - name: container-restarts
       successCondition: result[0] == 0
