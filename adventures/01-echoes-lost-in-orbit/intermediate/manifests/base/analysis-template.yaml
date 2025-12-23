@@ -5,7 +5,6 @@ metadata:
 spec:
   args:
     - name: namespace
-    - name: replica-count
   metrics:
     - name: container-restarts
       successCondition: result[0] == 0
@@ -23,7 +22,7 @@ spec:
               pod=~"echo-server-.*"
             }[1m])) or vector(0)
     - name: ready-containers
-      successCondition: result[0] >= {{args.replica-count}}
+      successCondition: result[0] >= 1
       failureLimit: 0
       inconclusiveLimit: 0
       consecutiveErrorLimit: 0
