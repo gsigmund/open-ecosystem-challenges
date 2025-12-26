@@ -22,7 +22,7 @@ data:
     exporters:
       debug:
         verbosity: detailed
-      jaeger:
+      otlp/jaeger:
         endpoint: jaeger-collector.jaeger.svc.cluster.local:4317
         tls:
           insecure: true
@@ -39,7 +39,7 @@ data:
       pipelines:
         traces:
           receivers: [otlp]
-          exporters: [debug, jaeger, spanmetrics]
+          exporters: [debug, otlp/jaeger, spanmetrics]
         metrics:
           receivers: [spanmetrics]
           exporters: [debug, prometheus]
