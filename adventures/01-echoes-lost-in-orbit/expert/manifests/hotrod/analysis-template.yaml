@@ -8,7 +8,7 @@ spec:
     - name: canary-hash
   metrics:
     -  name: traffic-detection
-       initialDelay: 30s
+       initialDelay: 90s
        interval: 10s
        count: 5
        successCondition: result[0] >= 0.05
