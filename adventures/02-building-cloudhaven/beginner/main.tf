@@ -31,6 +31,13 @@ terraform {
   #       the backend config or something like that
 }
 
+
+terraform {
+  backend "gcs" {
+    bucket  = "cloudhaven-tfstate"
+  }
+}
+
 # -----------------------------------------------------------------------------
 # Google Cloud Provider
 # -----------------------------------------------------------------------------
