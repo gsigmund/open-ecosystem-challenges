@@ -7,13 +7,14 @@ management for the Guild.
 ## ⏰ Deadline
 
 Sunday, 1 February 2026 at 23:59 CET
+
 > ℹ️ You can still complete the challenge after this date, but points will only be awarded for submissions before the
 > deadline.
 
 ## 💬 Join the discussion
 
 Share your solutions and questions in
-the [challenge thread](TODO)
+the [challenge thread](https://community.open-ecosystem.com/t/practice-infrastructure-as-code-with-zero-setup-adventure-02-beginner)
 in the Open Ecosystem Community.
 
 ## 🎯 Objective
@@ -27,7 +28,7 @@ By the end of this level, you should:
 
 ## 🧠 What You'll Learn
 
-- The OpenTofu/Terraform workflow (`init`, `plan`, `apply`)
+- OpenTofu/Terraform basics
 - Remote state backends for team collaboration
 - Dynamic resource provisioning with `for_each`
 - Conditional resources with the brand new `enabled` meta-argument
