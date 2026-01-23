@@ -53,7 +53,7 @@ Your Codespace comes pre-configured with the following tools to help you solve t
 
 Quick start:
 
-- Fork the repo
+- Fork the [repo](https://dynatrace-oss.github.io/open-ecosystem-challenges/)
 - Create a Codespace
 - Select "🌆 Adventure 02 | 🟢 Beginner (The Foundation Stones)"
 - Wait ~2 minutes for the environment to initialize (`Cmd/Ctrl + Shift + P` → `View Creation Log` to view progress)
