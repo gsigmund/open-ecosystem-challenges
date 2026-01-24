@@ -31,6 +31,7 @@ locals {
   location_map = {
     "europe-west1" = "EU"
     "europe-west3" = "EU"
+    "us-central1" = "US"
   }
 
   location = local.location_map[var.region]

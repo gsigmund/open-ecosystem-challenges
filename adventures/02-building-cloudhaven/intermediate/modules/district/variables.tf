@@ -13,11 +13,8 @@ variable "name" {
   description = "The unique identifier for the district (e.g., 'north-market')"
   type        = string
 
-  # TODO: add some regex thing here to validate names? idk ran out of time
-  #       something about lowercase and hyphens but not ending with hyphen??
-  #       error message is already there, just need the condition part
   validation {
-    condition     = length(var.name) > 0  # FIXME: this just checks it's not empty lol
+    condition     = can(regex("^[a-z][a-z0-9-]*[a-z0-9]$", var.name))
     error_message = "District name must be lowercase, start with a letter, and contain only letters, numbers, and hyphens."
   }
 }

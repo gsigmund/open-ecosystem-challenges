@@ -45,9 +45,9 @@ resource "google_sql_database_instance" "ledger" {
       record_client_address   = true
     }
 
-    user_labels = {
+    user_labels = merge(local.common_labels, {
       purpose = "merchant-ledger"
-    }
+    })
 
     deletion_protection_enabled = false
   }
