@@ -55,8 +55,13 @@ jobs:
         id: plan
         working-directory: ${{ env.WORKING_DIR }}
         run: |
-          echo "drift=false" >> $GITHUB_OUTPUT
-
+          tofu plan -detailed-exitcode
+          if [ $? -eq 2 ]; then
+            echo "drift=true" >> $GITHUB_OUTPUT
+          else
+            echo "drift=false" >> $GITHUB_OUTPUT
+          fi
+          
       # ----------------------------------------------------------------------
       # Generate Drift Log Entry (only if drift detected)
       # ----------------------------------------------------------------------
