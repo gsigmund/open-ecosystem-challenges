@@ -120,10 +120,12 @@ jobs:
       - name: 🔒 Scan for Vulnerabilities
         uses: aquasecurity/trivy-action@0.33.1
         with:
-          scan-type: 'fs'
-          scan-ref: '.'
-          format: 'json'
-          output: 'vulnerabilities.json'
+          scan-type: fs
+          scan-ref: .
+          format: json
+          output: vulnerabilities.json
+          exit-code: 0
+          severity: 'CRITICAL,HIGH,MEDIUM,LOW,UNKNOWN'
 
 
       - name: 📊 Count Vulnerabilities
