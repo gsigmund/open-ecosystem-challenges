@@ -186,5 +186,5 @@ jobs:
             });
 
       - name: 🚫 Fail on Blocking Vulnerabilities
-        if: ${{ steps.count.outputs.critical > 0 || steps.count.outputs.high > 0 }}
+        if: steps.count.outputs.critical > 0 || steps.count.outputs.high > 0
         run: exit 1
