@@ -80,6 +80,8 @@ jobs:
     services:
       gcp-api-mock:
         image: ghcr.io/katharinasick/gcp-api-mock:v1.1.4
+        ports: 
+          - 9000:8080
 
     steps:
       - name: 📥 Checkout
