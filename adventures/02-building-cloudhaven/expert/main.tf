@@ -42,8 +42,8 @@ provider "google" {
   # Technically, this wouldn't be necessary because we're also setting the
   # `STORAGE_EMULATOR_HOST` variable during setup but this makes things more
   # explicit.
-  storage_custom_endpoint = "__GCP_MOCK_ENDPOINT__/storage/v1/"
-  sql_custom_endpoint     = "__GCP_MOCK_ENDPOINT__/"
+  storage_custom_endpoint = "https://miniature-winner-5g56954r9rcvj59-30104.app.github.dev/storage/v1/"
+  sql_custom_endpoint     = "https://miniature-winner-5g56954r9rcvj59-30104.app.github.dev/"
 
   # Skip authentication since we're using a mock API
   access_token = "a-super-secure-token"
