@@ -61,7 +61,8 @@ jobs:
           else
             echo "drift=false" >> $GITHUB_OUTPUT
           fi
-          
+          exit 0
+
       # ----------------------------------------------------------------------
       # Generate Drift Log Entry (only if drift detected)
       # ----------------------------------------------------------------------
