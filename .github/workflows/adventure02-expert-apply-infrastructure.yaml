@@ -62,7 +62,7 @@ jobs:
         uses: OP5dev/TF-via-PR@v13
         with:
           working-directory: ${{ env.WORKING_DIR }}
-          command: plan
+          command: apply
           tool: tofu
           format: true
           validate: true
