@@ -19,7 +19,7 @@ env:
   TOFU_VERSION: "1.11.4"
   # This is only needed because we're using a mock GCS backend. In production, you'd remove this.
   # The actual value is set during startup.
-  STORAGE_EMULATOR_HOST: "https://miniature-winner-5g56954r9rcvj59-30104.app.github.dev"
+  STORAGE_EMULATOR_HOST: "https://upgraded-space-computing-machine-97wvxwqxwq37gpw-30104.app.github.dev"
 
 jobs:
   detect-drift:
