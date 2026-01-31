@@ -56,7 +56,7 @@ jobs:
         working-directory: ${{ env.WORKING_DIR }}
         run: |
           set +e 
-          tofu plan -detailed-exitcode
+          tofu plan -out -detailed-exitcode
           EXIT_CODE=$?
           set -e
           if [ $EXIT_CODE -eq 2 ]; then
