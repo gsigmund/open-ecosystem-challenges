@@ -5,17 +5,23 @@
 
 # -----------------------------------------------------------------------------
 # Check if a file contains a specific pattern
-# Usage: check_file_contains "file-path" "pattern" "Display Name" "Hint message"
+# Usage: check_file_contains "file-path" "pattern" "Display Name" "Hint message" [ignore_case]
 # -----------------------------------------------------------------------------
 check_file_contains() {
   local file_path=$1
   local pattern=$2
   local display_name=$3
   local hint=$4
+  local ignore_case=${5:-false}
+
+  local grep_opts="-q"
+  if [[ "$ignore_case" == "true" ]]; then
+    grep_opts="-iq"
+  fi
 
   print_test_section "Checking $display_name..."
 
-  if grep -q "$pattern" "$file_path" 2>/dev/null; then
+  if grep $grep_opts "$pattern" "$file_path" 2>/dev/null; then
     print_success_indent "$display_name"
     TESTS_PASSED=$((TESTS_PASSED + 1))
   else
@@ -25,5 +31,3 @@ check_file_contains() {
     FAILED_CHECKS+=("check_file_contains:$pattern")
   fi
 }
-
-

@@ -18,8 +18,9 @@ source "$LIB_DIR/prometheus.sh"
 source "$LIB_DIR/argo-rollouts.sh"
 source "$LIB_DIR/gcp-mock.sh"
 source "$LIB_DIR/github.sh"
+source "$LIB_DIR/submission.sh"
 source "$LIB_DIR/tracker.sh"
+source "$LIB_DIR/jaeger.sh"
 
 # Set up cleanup trap for port-forwards
 trap cleanup_port_forwards EXIT INT TERM
-
