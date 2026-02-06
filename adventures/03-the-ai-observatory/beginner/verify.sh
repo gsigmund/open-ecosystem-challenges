@@ -50,10 +50,22 @@ print_new_line
 # Summary & Next Steps
 # =============================================================================
 
+# Build failed checks JSON array
+failed_checks_json="[]"
+if [[ -n "${FAILED_CHECKS[*]:-}" ]]; then
+  failed_checks_json=$(printf '%s\n' "${FAILED_CHECKS[@]}" | jq -R . | jq -s .)
+fi
+
 if [[ $TESTS_FAILED -gt 0 ]]; then
+  # Track failure
+  track_verification_completed "failed" "$failed_checks_json"
+
   print_verification_summary "the ai observatory" "$DOCS_URL" "$OBJECTIVE"
   exit 1
 fi
+
+# Track success
+track_verification_completed "success" "$failed_checks_json"
 
 # Success!
 print_header "Test Results Summary"
