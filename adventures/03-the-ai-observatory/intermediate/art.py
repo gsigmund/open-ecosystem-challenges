@@ -79,7 +79,11 @@ class Art:
 
         # Initialize OpenTelemetry Meter ('art.rag.retrieval.count')
         self.meter = metrics.get_meter("art")
-        self.retrieval_counter = None
+        self.retrieval_counter = self.meter.create_counter(
+            name="art.rag.retrieval.count",
+            description="count per category",
+            unit="1"
+        )
 
     @task(name="rag.retrieve_context")
     def retrieve_context(self, user_input: str):
@@ -87,7 +91,14 @@ class Art:
         # Manual span for better observability - adds custom attributes
         with tracer.start_as_current_span("qdrant.similarity_search") as span:
             # Filter to only retrieve navigation documents, not entertainment (Sanctuary Moon)
-            filter = None
+            filter = models.Filter(
+                must=[
+                    models.FieldCondition(
+                        key="metadata.category",
+                        match=models.MatchValue(value="navigation"),
+                    )
+                ]
+            )
 
             # Add searchable attributes for debugging
             span.set_attribute("search.query", user_input)
@@ -100,15 +111,18 @@ class Art:
             span.set_attribute("search.results_count", len(results))
 
         context_text = ""
-        retrieved_categories = []
-        for doc in results:
-            category = doc.metadata.get("category", "unknown")
-            context_text += f"\n[Source: {category}]\n{doc.page_content}\n"
-            retrieved_categories.append(category)
+        with tracer.start_as_current_span("rag.context_assembly") as span:
+            retrieved_categories = []
+            for doc in results:
+                category = doc.metadata.get("category", "unknown")
+                context_text += f"\n[Source: {category}]\n{doc.page_content}\n"
+                retrieved_categories.append(category)
 
-            # Custom metric to track retrieval by category
+                # Custom metric to track retrieval by category
+                self.retrieval_counter.add(1, {"category": category})
 
-        # Add span attribute showing what categories were actually retrieved
+            # Add span attribute showing what categories were actually retrieved
+            span.set_attribute("context.categories", retrieved_categories)
 
         return context_text
 
